@@ -32,6 +32,7 @@ def student_switch(switch_list, students_list):
 
     return switch_list[1:]    # 맨 처음 넣은 맨 앞의 2 제외하고 반환
 
+
 # 스위치 개수, 스위치 리스트, 학생 수, 학생 리스트를 변수로 받음
 my_switch_num = int(input())
 my_switch_list = list(input().split())
