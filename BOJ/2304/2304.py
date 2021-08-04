@@ -1,53 +1,47 @@
 # 2304. 창고 다각형
 
 
-def warehouse(w_list):
-    w_list.sort()    # 받은 리스트를 좌표순으로 정렬
-    max_height = 0    # 건물 최대 높이
-
-    for w in w_list:
-        if w[1] > max_height:
-            max_height = w[1]    # 건물 최대 높이 구함
-      
-    # 최대 높이를 기준으로 좌우 따로 구할 예정
-    area = max_height
-
-    # 가장 높은 기둥 왼쪽의 면적을 구할 예정
-    local_max = w_list[0][1]
-    local_m_i = w_list[0][0]
-    i = 0
+def warehouse(col_list):
+    col_list.sort()    # 기둥 리스트를 위치순으로 정렬
+    c_list = []    # 기둥의 높이만을 담은 리스트 생성
     while True:
-        if w_list[i][1] == max_height:
-            area += (w_list[i][0] - local_m_i) * local_max
+        if len(col_list) == 0:
             break
-        elif w_list[i][1] > local_max:
-            area += (w_list[i][0] - local_m_i) * local_max
-            local_max = w_list[i][1]
-            local_m_i = w_list[i][0]
-        i += 1
+        elif col_list[0][0] == len(c_list):
+            c_list.append(col_list[0][1])
+            col_list = col_list[1:]
+        else:    
+            c_list.append(0)    # 기둥이 없으면 0
+  
+    x, y = 0, c_list[0]    # 현재 위치 초기화
     
-    i = 0
-    local_max = w_list[-1][1]
-    local_m_i = w_list[-1][0]
-    while True:
-        if w_list[-1-i][1] == max_height:
-            area += (local_m_i - w_list[-1-i][0]) * local_max
-            break
-
-        elif w_list[-1-i][1] > local_max:
-            area += (local_m_i - w_list[-1-i][0]) * local_max
-            local_max = w_list[-1-i][1]
-            local_m_i = w_list[-1-i][0]
+    result = 0    # 최종 면적 결과
+    # print(len(c_list) - 1, c_list[-1])
+    for x in range(len(c_list) - 1):
+        print(x, c_list[x+1:])
+        # 만약 c_list[x+1:]의 최댓값이 y보다 크다면
+        # 그 최댓값의 idx와 x의 차이와 y의 곱을 면적에 추가
+        if y <= max(c_list[x+1:]):
             
-        i += 1
+            # print(c_list.index(max(c_list[x+1:])), y)
+            print(y)
+            result += y
+        # 만약 c_list[x+1:]의 최댓값이 y보다 작다면
+        # 그 최댓값의 idx와 x의 차이와 최댓값의 곱을 면적에 추가
+        elif y > max(c_list[x+1:]):
+            # print(c_list.index(max(c_list[x+1:])))
+            print(max(c_list[x+1:]))
+            result += max(c_list[x+1:])
 
-    return area
+    return result
+    
+
 
     
 N = int(input())
 
-my_w_list = []
+my_col_list = []
 for i in range(N):
-    my_w_list.append(list(map(int, input().split())))
+    my_col_list.append(list(map(int, input().split())))
 
-print(warehouse(my_w_list))
+print(warehouse(my_col_list))
