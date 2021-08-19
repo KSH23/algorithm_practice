@@ -1,4 +1,4 @@
-# 12586. 회문
+# 4861. 회문
 
 
 def palindrome(words, n, m):

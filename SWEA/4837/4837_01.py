@@ -1,4 +1,4 @@
-# 12525. 부분집합 합
+# 4837. 부분집합 합
 
 
 def subset_sum(n, num_list):
