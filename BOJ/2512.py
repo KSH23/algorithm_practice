@@ -5,9 +5,8 @@ N = int(input())    # 지방의 수
 budget = list(map(int, input().split()))    # 예산 리스트
 total_budget = int(input())    # 총 예산
 
-budget.sort()    # 이분탐색을 사용하기 위하여 리스트를 오름차순 정렬
 start = 0
-end = budget[-1]
+end = max(budget)    # 이 문제의 경우는 정렬할 필요가 없다
 ans = 0    # 최종 상한액 변수
 
 '''
