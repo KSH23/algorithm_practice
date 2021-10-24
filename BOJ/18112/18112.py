@@ -22,29 +22,28 @@ def binary_game():
         if cur_num == target:  # 목표 이진수 도착
             path[cur_num] += [cur_num]  # 디버깅용
             return checked[cur_num]
+  
+        # 한 자리 숫자를 보수로 바꾸기
+        for i in range(len(bin(cur_num)) - 3):
+            result = toggle(cur_num, i)
+            if 1024 <= result:  # 1024 이상의 숫자는 나올 수 없음
+                continue
+            if -1 < checked[result]:
+                continue  # 이미 확인한 숫자는 무시
+            checked[result] = checked[cur_num] + 1  # 연산 횟수 갱신
+            path[result] += path[cur_num] + [cur_num]  # 디버깅용
+            q.append(result)
 
-        for _ in range(3):
-            # 한 자리 숫자를 보수로 바꾸기
-            for i in range(len(bin(cur_num)) - 3):
-                result = toggle(cur_num, i)
-                if 1024 <= result:  # 1024 이상의 숫자는 나올 수 없음
-                    continue
-                if -1 < checked[result]:
-                    continue  # 이미 확인한 숫자는 무시
-                checked[result] = checked[cur_num] + 1  # 연산 횟수 갱신
-                path[result] += path[cur_num] + [cur_num]  # 디버깅용
-                q.append(result)
-
-            # 현재 수에 1 더하기와 현재 수에서 1 빼기
-            for delta in [-1, 1]:
-                result = cur_num + delta
-                if 1024 <= result:  # 1024 이상의 숫자는 나올 수 없음
-                    continue
-                if -1 < checked[result] or result < 0:
-                    continue  # 이미 확인한 숫자 또는 음수 무시
-                checked[result] = checked[cur_num] + 1  # 연산 횟수 갱신
-                path[result] += path[cur_num] + [cur_num]  # 디버깅용
-                q.append(result)
+        # 현재 수에 1 더하기와 현재 수에서 1 빼기
+        for delta in [-1, 1]:
+            result = cur_num + delta
+            if 1024 <= result:  # 1024 이상의 숫자는 나올 수 없음
+                continue
+            if -1 < checked[result] or result < 0:
+                continue  # 이미 확인한 숫자 또는 음수 무시
+            checked[result] = checked[cur_num] + 1  # 연산 횟수 갱신
+            path[result] += path[cur_num] + [cur_num]  # 디버깅용
+            q.append(result)
 
 
 start = int(input(), 2)
