@@ -1,5 +1,4 @@
-# 방문 길이
-# https://programmers.co.kr/learn/courses/30/lessons/49994
+# 49994. 방문 길이
 
 
 def solution(dirs):
