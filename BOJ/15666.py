@@ -1,4 +1,4 @@
-# 15657. N과 M (8)
+# 15666. N과 M (12)
 
 
 def make_sequence(num_cnt, cur_sequence):
