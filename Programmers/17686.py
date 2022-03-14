@@ -11,16 +11,16 @@ def solution(files):
         while number_end_index < len(file) - 1 and file[number_end_index + 1].isnumeric():
             number_end_index += 1
 
-        # HEAD, NUMBER, 파일의 인덱스, 파일 명을 새로 저장
+        # HEAD, NUMBER, 기존의 파일 명을 담은 리스트로 교체
         files[file_index] = [
             file[0: number_start_index].lower(),
             int(file[number_start_index: number_end_index + 1]),
-            file_index,
             file
         ]
 
     # 파일 정렬 후 파일명만 출력
-    files.sort()
-    answer = [file[3] for file in files]
+    # 파이썬의 sort() 메서드는 안정 정렬을 하기 때문에 정렬시 입력 순서를 유지한다
+    files.sort(key = lambda x: (x[0], x[1]))
+    answer = [file[2] for file in files]
 
     return answer
